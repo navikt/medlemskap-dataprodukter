@@ -1,0 +1,49 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: medlemskap-dataprodukter
+  namespace: medlemskap
+  labels:
+    team: medlemskap
+spec:
+  azure:
+    application:
+      enabled: true
+  image: {{image}}
+  liveness:
+    path: "/isAlive"
+    port: 8080
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/isReady"
+    port: 8080
+    initialDelay: 20
+    timeout: 60
+  ingresses:
+    - https://medlemskap-dataprodukter.intern.dev.nav.no
+  replicas:
+    min: 2
+    max: 2
+    cpuThresholdPercentage: 50
+  prometheus:
+    enabled: true
+    path: "/metrics"
+  secureLogs:
+    enabled: true
+  kafka:
+    pool: nav-dev
+  accessPolicy:
+    outbound:
+      rules:
+      external:
+        - host: login.microsoftonline.com
+  resources:
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+  env:
+
