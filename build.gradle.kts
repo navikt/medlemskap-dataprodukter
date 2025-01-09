@@ -1,5 +1,6 @@
 val ktorVersion = "3.0.3"
 val konfigVersion = "1.6.10.0"
+val kafkaVersion = "3.9.0"
 val jacksonVersion = "2.14.1"
 val kotlinLoggerVersion = "1.8.3"
 val resilience4jVersion = "1.5.0"
@@ -56,6 +57,8 @@ dependencies {
     implementation("io.ktor:ktor-client-json:$ktorVersion")
     implementation("com.natpryce:konfig:$konfigVersion")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggerVersion")
+    //Kafka-avhengigheter
+    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
     // 2.8.0 er tilgjengelig, burde kanskje oppdatere
     testImplementation(platform("org.junit:junit-bom:5.7.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
