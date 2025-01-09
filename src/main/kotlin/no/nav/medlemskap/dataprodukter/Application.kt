@@ -24,7 +24,7 @@ class Application(
 
     fun start() {
         log.info("Start application")
-
+//
 
         @OptIn(DelicateCoroutinesApi::class)
         //val consumeJob = consumer.flow().launchIn(GlobalScope)
