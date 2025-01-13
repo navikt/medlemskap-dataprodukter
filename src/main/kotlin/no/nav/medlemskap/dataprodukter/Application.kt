@@ -4,6 +4,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import no.nav.medlemskap.dataprodukter.config.Environment
+import no.nav.medlemskap.dataprodukter.persistence.DataSourceBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -24,6 +25,13 @@ class Application(
 
     fun start() {
         log.info("Start application")
+        val dataSourceBuilder = DataSourceBuilder(env)
+        try {
+            dataSourceBuilder.migrate()
+        }
+        catch (t:Throwable){
+            log.warn("klarte ikke å kjøre migrerings skript. årsak : ${t.message}")
+        }
 
 
         @OptIn(DelicateCoroutinesApi::class)

@@ -7,6 +7,11 @@ val resilience4jVersion = "1.5.0"
 val logstashVersion = "6.4"
 val logbackVersion = "1.5.15"
 val mainClass = "no.nav.medlemskap.dataprodukter.ApplicationKt"
+val flywayVersion = "11.1.1"
+val postgresVersion = "42.7.4"
+val hikariVersion = "6.2.1"
+val testcontainerVersion = "1.20.4"
+
 
 plugins {
     kotlin("jvm") version "1.9.20"
@@ -59,9 +64,15 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggerVersion")
     //Kafka-avhengigheter
     implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
+    //database
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+    implementation("org.postgresql:postgresql:$postgresVersion")
+    implementation("com.zaxxer:HikariCP:$hikariVersion")
     // 2.8.0 er tilgjengelig, burde kanskje oppdatere
     testImplementation(platform("org.junit:junit-bom:5.7.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation ("org.testcontainers:postgresql:$testcontainerVersion")
+    testImplementation ("org.testcontainers:junit-jupiter:1.16.0")
 }
 
 tasks {
