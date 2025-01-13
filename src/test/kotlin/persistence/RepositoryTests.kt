@@ -34,8 +34,6 @@ class RepositoryTests : AbstractContainerDatabaseTest() {
         postgresqlContainer.withUrlParam("password", postgresqlContainer.password)
         val dsb = DataSourceBuilder(mapOf("DB_JDBC_URL" to postgresqlContainer.jdbcUrl))
         dsb.migrate();
-        val v = dsb.getDataSource().connection.createStatement().execute("SELECT * FROM vurdering")
-
 
     }
     }
