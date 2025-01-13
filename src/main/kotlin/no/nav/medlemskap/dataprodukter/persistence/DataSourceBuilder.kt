@@ -50,6 +50,7 @@ class DataSourceBuilder(env: Map<String, String>) {
     private fun runMigration(dataSource: DataSource) =
         Flyway.configure()
             .dataSource(dataSource)
+            //.locations("filesystem:src/main/resources/db/migration")
             .load()
             .migrate()
 

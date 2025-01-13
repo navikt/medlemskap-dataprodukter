@@ -11,6 +11,7 @@ val flywayVersion = "9.22.3"
 val postgresVersion = "42.7.4"
 val hikariVersion = "6.2.1"
 val testcontainerVersion = "1.20.4"
+val kotliqueryVersion = "1.3.1"
 
 
 plugins {
@@ -68,6 +69,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.postgresql:postgresql:$postgresVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
+    implementation("com.github.seratch:kotliquery:$kotliqueryVersion")
     // 2.8.0 er tilgjengelig, burde kanskje oppdatere
     testImplementation(platform("org.junit:junit-bom:5.7.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")

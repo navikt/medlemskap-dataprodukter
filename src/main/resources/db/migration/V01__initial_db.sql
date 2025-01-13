@@ -10,12 +10,11 @@ CREATE TABLE IF NOT EXISTS vurdering
 
 CREATE  INDEX IF NOT EXISTS fnr_idx ON vurdering (fnr);
 
-CREATE TABLE IF NOT EXISTS konklusjoner
+CREATE TABLE IF NOT EXISTS brudd
 (
     id VARCHAR(100),
-    regel_id VARCHAR(100)
+    regel_id VARCHAR(100),
     beskrivelse VARCHAR(100)
-
     );
 
-CREATE  INDEX IF NOT EXISTS id_idx ON konklusjoner (id);
+CREATE  INDEX IF NOT EXISTS id_idx ON brudd (id);
