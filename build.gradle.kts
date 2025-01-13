@@ -7,14 +7,14 @@ val resilience4jVersion = "1.5.0"
 val logstashVersion = "6.4"
 val logbackVersion = "1.5.15"
 val mainClass = "no.nav.medlemskap.dataprodukter.ApplicationKt"
-val flywayVersion = "11.1.1"
+val flywayVersion = "9.22.3"
 val postgresVersion = "42.7.4"
 val hikariVersion = "6.2.1"
 val testcontainerVersion = "1.20.4"
 
 
 plugins {
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "2.1.0"
     application
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }

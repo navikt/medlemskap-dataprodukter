@@ -41,6 +41,7 @@ class DataSourceBuilder(env: Map<String, String>) {
         }
         catch (t:Throwable){
             //TODO: Logging
+            t.printStackTrace()
         }
 
     }
