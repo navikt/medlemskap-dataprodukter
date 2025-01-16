@@ -39,6 +39,15 @@ jobs:
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@0bdd871935719febd78681f197cd39af5b6e16a6
+      - name: Dispatch trivy scan
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST repos/${{ github.repository }}/dispatches \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -f event_type=start-trivy \
+            -f client_payload='{"image": "${{ steps.docker-push.outputs.image }}"}'
 
     outputs:
       image: ${{ steps.docker-push.outputs.image }}
@@ -56,12 +65,4 @@ jobs:
           RESOURCE: .nais/nais.yaml
           IMAGE: ${{ needs.build_and_push.outputs.image }}
           TELEMETRY: ${{ needs.build_and_push.outputs.telemetry }}
-      - name: Dispatch trivy scan
-        if: success()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method POST repos/${{ github.repository }}/dispatches \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            -f event_type=start-trivy \
-            -f client_payload='{"image": "${{ needs.build_and_push.outputs.image }}"}'
+
