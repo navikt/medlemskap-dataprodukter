@@ -64,4 +64,4 @@ jobs:
           gh api --method POST repos/${{ github.repository }}/dispatches \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -f event_type=start-trivy \
-            -f client_payload='{"image": "${{ steps.docker-push.outputs.image }}"}'
+            -f client_payload='{"image": "${{ needs.build_and_push.outputs.image }}"}'
