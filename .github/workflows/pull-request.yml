@@ -10,9 +10,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      checks: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -51,7 +48,7 @@ jobs:
         run: |
           curl -X POST --data-urlencode "payload={\"channel\": \"$CHANNEL\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $WEBHOOK_URL
         env:
-          MESSAGE: "Bygg feilet"
+          MESSAGE: "Bygg feilet."
           CHANNEL: "#team-p3-medlemskap-notifications"
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
       - name: Generate and submit dependency graph
