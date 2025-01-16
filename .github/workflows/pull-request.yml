@@ -46,6 +46,7 @@ jobs:
         run: |
           gh api --method POST repos/${{ github.repository }}/dispatches \
             -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Accept: application/vnd.github+json" \
             -f event_type=start-trivy \
             -f client_payload='{"image": "${{ steps.docker-push.outputs.image }}"}'
 
