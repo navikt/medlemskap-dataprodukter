@@ -50,10 +50,8 @@ class MedlemskapVurdertConsumer(
     fun flow(): Flow<List<VurdertMessageRecord>> =
         flow {
             while (true) {
-
-
-                    emit(pollMessages())
-
+                emit(emptyList<VurdertMessageRecord>()) //fjerne denne når vi er klare til å laste data i produksjon
+                //emit(pollMessages()) // legg in denne når vi er klare til å laste data i produksjon
             }
         }.onEach { it ->
             logger.debug { "flex messages received :" + it.size + "on topic " + config.MedlemskapVurdertTopic }
