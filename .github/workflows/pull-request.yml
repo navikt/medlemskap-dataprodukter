@@ -1,6 +1,6 @@
 name: build
 permissions:
-  contents: "read"
+  contents: "write"
   id-token: "write"
   packages: "write"
 on: [ pull_request ]
