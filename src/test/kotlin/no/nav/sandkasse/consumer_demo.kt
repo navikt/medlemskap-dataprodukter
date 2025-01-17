@@ -11,11 +11,13 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 import org.apache.kafka.common.serialization.StringDeserializer
+import org.junit.jupiter.api.Disabled
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 
+@Disabled
 fun main(args: Array<String>) {
     val securityStrategy: KafkaConfig.SecurityStrategy = PlainStrategy(environment = System.getenv())
     val value = 1652174197864
