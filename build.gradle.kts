@@ -76,7 +76,11 @@ dependencies {
     testImplementation ("org.testcontainers:postgresql:$testcontainerVersion")
     testImplementation ("org.testcontainers:junit-jupiter:1.16.0")
 }
-
+tasks.compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "21" // Set JVM target for Kotlin code to 21
+    }
+}
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "21"
@@ -105,6 +109,7 @@ tasks {
         java.targetCompatibility = JavaVersion.VERSION_21
         java.sourceCompatibility = JavaVersion.VERSION_21
     }
+
 }
 
 application {
