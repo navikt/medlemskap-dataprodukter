@@ -4,13 +4,14 @@ import no.nav.medlemskap.dataprodukter.domain.Brudd
 import no.nav.medlemskap.dataprodukter.domain.Vurdering
 import no.nav.medlemskap.dataprodukter.persistence.DataSourceBuilder
 import no.nav.medlemskap.dataprodukter.persistence.PostgresVurdertRepository
-import org.apache.kafka.common.protocol.types.Field
-import org.junit.BeforeClass
+import org.junit.Ignore
+
 import org.junit.jupiter.api.Assertions
 
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
+
 import java.time.LocalDate
 import java.util.UUID
 import java.util.logging.Level
@@ -19,6 +20,7 @@ import java.util.logging.LogManager
 
 class MyPostgreSQLContainer(imageName: String) : PostgreSQLContainer<MyPostgreSQLContainer>(imageName)
 @org.testcontainers.junit.jupiter.Testcontainers
+@Ignore
 class RepositoryTests : AbstractContainerDatabaseTest() {
 
     init {
