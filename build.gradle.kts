@@ -79,7 +79,7 @@ dependencies {
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "20"
+        kotlinOptions.jvmTarget = "21"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     shadowJar {
@@ -95,16 +95,15 @@ tasks {
         }
     }
     java{
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
 
     }
     test {
         useJUnitPlatform()
-        //Trengs inntil videre for bytebuddy med java 16, som brukes av mockk.
         jvmArgs = listOf("-Dnet.bytebuddy.experimental=true")
-        java.targetCompatibility = JavaVersion.VERSION_20
-        java.sourceCompatibility = JavaVersion.VERSION_20
+        java.targetCompatibility = JavaVersion.VERSION_21
+        java.sourceCompatibility = JavaVersion.VERSION_21
     }
 }
 
