@@ -76,6 +76,11 @@ dependencies {
     testImplementation ("org.testcontainers:postgresql:$testcontainerVersion")
     testImplementation ("org.testcontainers:junit-jupiter:1.16.0")
 }
+tasks.withType<Test> {
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    })
+}
 tasks.compileTestKotlin {
     kotlinOptions {
         jvmTarget = "21" // Set JVM target for Kotlin code to 21
