@@ -13,22 +13,19 @@ val hikariVersion = "6.2.1"
 val testcontainerVersion = "1.20.4"
 val kotliqueryVersion = "1.3.1"
 
+kotlin {
+    jvmToolchain(21)
+}
 
 plugins {
     kotlin("jvm") version "2.1.0"
     application
-    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "no.nav.medlemskap"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://packages.confluent.io/maven/")
-    maven("https://jitpack.io")
-    maven("https://repo.adeo.no/repository/maven-releases")
-    maven("https://repo.adeo.no/repository/nexus2-m2internal")
 }
 
 dependencies {
@@ -78,33 +75,31 @@ dependencies {
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "20"
-        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    }
-    shadowJar {
+    withType<Jar> {
         archiveBaseName.set("app")
-        archiveClassifier.set("")
-        archiveVersion.set("")
+
         manifest {
-            attributes(
-                mapOf(
-                    "Main-Class" to mainClass
-                )
-            )
+            attributes["Main-Class"] = mainClass
+            attributes["Class-Path"] = configurations.runtimeClasspath.get().joinToString(separator = " ") {
+                it.name
+            }
+        }
+
+        doLast {
+            configurations.runtimeClasspath.get().forEach {
+                val file = File("${layout.buildDirectory.get()}/libs/${it.name}")
+                if (!file.exists())
+                    it.copyTo(file)
+            }
         }
     }
-    java{
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
 
-    }
-    test {
+    withType<Test> {
         useJUnitPlatform()
-        //Trengs inntil videre for bytebuddy med java 16, som brukes av mockk.
-        jvmArgs = listOf("-Dnet.bytebuddy.experimental=true")
-        java.targetCompatibility = JavaVersion.VERSION_20
-        java.sourceCompatibility = JavaVersion.VERSION_20
+    }
+
+    withType<Wrapper> {
+        gradleVersion = "8.12"
     }
 }
 
