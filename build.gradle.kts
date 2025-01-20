@@ -25,10 +25,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://packages.confluent.io/maven/")
-    maven("https://jitpack.io")
-    maven("https://repo.adeo.no/repository/maven-releases")
-    maven("https://repo.adeo.no/repository/nexus2-m2internal")
+
 }
 
 dependencies {
@@ -73,10 +70,17 @@ dependencies {
     testImplementation ("org.testcontainers:postgresql:$testcontainerVersion")
     testImplementation ("org.testcontainers:junit-jupiter:1.16.0")
 }
+
+kotlin {
+    jvmToolchain(21)
+}
 tasks.withType<Test> {
     javaLauncher.set(javaToolchains.launcherFor {
         languageVersion.set(JavaLanguageVersion.of(21))
     })
+}
+tasks.withType<Wrapper> {
+    gradleVersion = "8.12"
 }
 tasks.compileTestKotlin {
     kotlinOptions {
